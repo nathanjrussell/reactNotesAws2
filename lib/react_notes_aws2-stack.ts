@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import { env } from 'process';
 export class ReactNotesAws2Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -14,18 +15,29 @@ export class ReactNotesAws2Stack extends cdk.Stack {
       handler: "main.handler"
     });
 
-    const functionUrl = lambdaFunction.addFunctionUrl( {
-      authType: lambda.FunctionUrlAuthType.NONE,
-      cors: {
-        allowedOrigins: ['*'],
-        allowedMethods: [lambda.HttpMethod.ALL],
-        allowedHeaders: ['*'],
-      }
+    /**
+     * Represents the API Gateway for the React Notes application.
+     */
+    const api = new apigateway.RestApi(this, 'ApiGateway', {
+      restApiName: 'ReactNotesApiGateway',
+      description: 'This is my lambda function',
     });
 
-    new cdk.CfnOutput(this, 'Url', { 
-      value: functionUrl.url,
-    });
+    const notesResource = api.root.addResource('notes');
+    notesResource.addMethod('GET', new apigateway.LambdaIntegration(lambdaFunction));
+
+    // const functionUrl = lambdaFunction.addFunctionUrl( {
+    //   authType: lambda.FunctionUrlAuthType.NONE,
+    //   cors: {
+    //     allowedOrigins: ['*'],
+    //     allowedMethods: [lambda.HttpMethod.ALL],
+    //     allowedHeaders: ['*'],
+    //   }
+    // });
+
+    // new cdk.CfnOutput(this, 'Url', { 
+    //   value: functionUrl.url,
+    // });
   }
 
 }

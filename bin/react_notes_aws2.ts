@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { ReactNotesAws2Stacks } from '../lib/react_notes_aws2-stack';
+import { ReactNotesAws2Stack } from '../lib/react_notes_aws2-stack';
 
 const app = new cdk.App();
-new ReactNotesAws2Stacks(app, 'ReactNotesAws2Stacks', {
+new ReactNotesAws2Stack(app, 'ReactNotesAws2Stacks', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import { env } from 'process';
-export class ReactNotesAws2Stacks extends cdk.Stack {
+export class ReactNotesAws2Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, { 
       ...props, env: {account: '360228089988'}

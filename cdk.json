@@ -17,7 +17,8 @@
     ]
   },
   "context": {
-    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "aws-cdk:default-account": "360228089988", // your AWS account ID
+    "aws-cdk:default-region": "us-east-1",
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [
       "aws",

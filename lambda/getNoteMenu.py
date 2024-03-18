@@ -52,7 +52,7 @@ def lambda_handler(event, context):
     
     data = {}
 
-    data['general'] = getMenuItems('general')
+    data['general'] = getMenuItems(general)
     data['subject'] = getNextMenu(data['general'],subject)
     data['category'] = getNextMenu(data['subject'],category)
     data['subcategory'] = getNextMenu(data['category'],subcategory)

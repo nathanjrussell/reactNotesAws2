@@ -30,12 +30,12 @@ export class ReactNotesAws2Stack extends cdk.Stack {
        const deployment = new apigateway.Deployment(this, 'ApiDeployment', {
         api: api,
       });
-  
+      const stageName = 'prod-' + Date.now();
       // Associate the deployment with a stage
     // Create a stage and associate it with the deployment
     new apigateway.Stage(this, 'ProdStage', {
       deployment: deployment,
-      stageName: 'prod',
+      stageName: stageName,
     });
   }
 

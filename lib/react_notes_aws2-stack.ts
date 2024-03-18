@@ -7,7 +7,7 @@ export class ReactNotesAws2Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, { 
         ...props, 
-        env: {account: process.env.AWS_ACCOUNT_NUMBER},
+        env: {account: '360228089988'},
         description: "The AWS CDK stack for the React Notes App"
     });
 

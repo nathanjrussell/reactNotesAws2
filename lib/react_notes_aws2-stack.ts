@@ -7,7 +7,7 @@ export class ReactNotesAws2Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, { 
         ...props, 
-        env: {account: '360228089988'},
+        env: {account: process.env.AWS_ACCOUNT_NUMBER},
         description: "The AWS CDK stack for the React Notes App"
     });
 
@@ -15,7 +15,7 @@ export class ReactNotesAws2Stack extends cdk.Stack {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
       description: "Role for the react notes app lambda functions to read from the DynamoDB table",
     });
-    const policyName = 'arn:aws:iam::360228089988:policy/service-role/AWSLambdaMicroserviceExecutionRole-254f80b2-c0c1-402a-9974-6b1d31eab1e6';
+    const policyName = 'arn:aws:iam::' + process.env.AWS_ACCOUNT_NUMBER + ':policy/service-role/AWSLambdaMicroserviceExecutionRole-254f80b2-c0c1-402a-9974-6b1d31eab1e6';
     lambdaRole.addManagedPolicy(iam.ManagedPolicy.fromManagedPolicyArn(this, 'CustomPolicy', policyName));
 
     const lambdaFunction = new lambda.Function(this, 'LambdaFunction', {

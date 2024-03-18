@@ -44,11 +44,19 @@ def getNextMenu(previous_menu_list, menu_name):
 
 
 def lambda_handler(event, context):
-    general = event['queryStringParameters'].get('general','general')
-    subject = event['queryStringParameters'].get('subject',None)
-    category = event['queryStringParameters'].get('category',None)
-    subcategory = event['queryStringParameters'].get('subcategory',None)
-    topic = event['queryStringParameters'].get('topic',None)
+    queryStringParameters = event.get('queryStringParameters',None)
+    if queryStringParameters is None:
+        general = 'general'
+        subject = None
+        category = None
+        subcategory = None
+        topic = None
+    else:
+        general = event['queryStringParameters'].get('general','general')
+        subject = event['queryStringParameters'].get('subject',None)
+        category = event['queryStringParameters'].get('category',None)
+        subcategory = event['queryStringParameters'].get('subcategory',None)
+        topic = event['queryStringParameters'].get('topic',None)
     
     data = {}
 

@@ -26,7 +26,17 @@ export class ReactNotesAws2Stack extends cdk.Stack {
     const notesResource = api.root.addResource('notes');
     notesResource.addMethod('GET', new apigateway.LambdaIntegration(lambdaFunction));
 
-   
+       // Create a deployment of the API
+       const deployment = new apigateway.Deployment(this, 'ApiDeployment', {
+        api: api,
+      });
+  
+      // Associate the deployment with a stage
+    // Create a stage and associate it with the deployment
+    new apigateway.Stage(this, 'ProdStage', {
+      deployment: deployment,
+      stageName: 'prod',
+    });
   }
 
 }

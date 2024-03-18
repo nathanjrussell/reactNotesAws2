@@ -12,8 +12,8 @@ export class ReactNotesAws2Stack extends cdk.Stack {
     const lambdaRole = new iam.Role(this, 'LambdaRole', {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
     });
-
-    lambdaRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaMicroserviceExecutionRole-254f80b2-c0c1-402a-9974-6b1d31eab1e6'));
+    const policyName = 'arn:aws:iam::360228089988:policy/service-role/AWSLambdaMicroserviceExecutionRole-254f80b2-c0c1-402a-9974-6b1d31eab1e6';
+    lambdaRole.addManagedPolicy(iam.ManagedPolicy.fromManagedPolicyArn(this, 'CustomPolicy', policyName));
 
     const lambdaFunction = new lambda.Function(this, 'LambdaFunction', {
       runtime: lambda.Runtime.PYTHON_3_12,
